@@ -35,8 +35,6 @@
                     check[i].checked = this.checked;
                 }
             }
-
-
         }
         function del (id){
             if(confirm("你确定要删除嘛？该操作不可撤销？")){
@@ -52,6 +50,16 @@
                         document.getElementById("form").submit();
                     }
                 }
+            }
+        }
+        function left(str,index){
+            if(index > 1){
+                window.location.href= "" + str + index-1;
+            }
+        }
+        function right(str,index,max){
+            if(index < max-1){
+                window.location.href=str + index+1;
             }
         }
     </script>
@@ -81,10 +89,10 @@
             <th>邮箱</th>
             <th>操作</th>
         </tr>
-        <c:forEach items='${pageContext.request.getAttribute("user")}' var="user" varStatus="s">
+        <c:forEach items='${pb.users}' var="user" varStatus="s">
             <tr>
                 <th><input id="check" value="${user.id}" name="uid" type="checkbox"></th>
-                <td>${s.count}</td>
+                <td>${s.count + (pb.indexOfPages-1) * 5}</td>
                 <td>${user.name}</td>
                 <td>${user.gender}</td>
                 <td>${user.age}</td>
@@ -92,7 +100,7 @@
                 <td>${user.qq}</td>
                 <td>${user.emile}</td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/update.jsp?id=${user.id}&name=${user.name}&age=${user.age}&qq=${user.qq}.qq&emile=${user.emile}">修改</a>
+                    <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/update.jsp?id=${user.id}&name=${user.name}&age=${user.age}&qq=${user.qq}.qq&emile=${user.emile}&index=${pb.indexOfPages}">修改</a>
                     &nbsp;<a class="btn btn-warning btn-sm" id="del" onclick="del('${pageContext.request.contextPath}/deleteInfServlet?id=${user.id}')">删除</a>
                     </td>
             </tr>
@@ -103,6 +111,32 @@
         </div>
     </table>
     </form>
+    <nav aria-label="Page navigation" style="float: left">
+        <ul class="pagination">
+            <li class="${pb.indexOfPages==1?'disable':''}">
+                <a href="${pageContext.request.contextPath}/showPagesServlet?index=${pb.indexOfPages==1?1:pb.indexOfPages-1}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <c:forEach begin="1" end="${pb.totalPages}" var = "i" >
+                <c:if test="${pb.indexOfPages == i}">
+                    <li class="active"><a href="${pageContext.request.contextPath}/showPagesServlet?index=${i}">${i}</a></li>
+                </c:if>
+                <c:if test="${pb.indexOfPages != i}">
+                    <li><a href="${pageContext.request.contextPath}/showPagesServlet?index=${i}">${i}</a></li>
+                </c:if>
+            </c:forEach>
+            <li>
+                <a href="${pageContext.request.contextPath}/showPagesServlet?index=${pb.indexOfPages==pb.totalPages?pb.indexOfPages:pb.indexOfPages+1}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <span style="font-size: 20px;margin-left: 10px">
+                共${pb.totalInf}条记录，共${pb.totalPages}页,第${pb.indexOfPages}页
+            </span>
+        </ul>
+
+    </nav>
 </div>
 </body>
 </html>

@@ -18,6 +18,7 @@
         <div class="container" style="width: 400px;">
         <h3 style="text-align: center;">修改联系人</h3>
         <form action="${pageContext.request.contextPath}/updateServlet" method="post">
+            <input type="hidden" value="${pageContext.request.getParameter("index")}" name="index">
           <div class="form-group">
             <label for="name">姓名：</label>
             <input type="text" class="form-control" id="name" name="name" value="${pageContext.request.getParameter("name")}" readonly="readonly" placeholder="请输入姓名" />
