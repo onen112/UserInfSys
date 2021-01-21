@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             Service se = new ServiceImp();
             if(se.login(user,psw)){
                 //用户名和密码存在
-                request.getRequestDispatcher(request.getContextPath() + "/selectByPageServlet").forward(request,response);
+                request.getRequestDispatcher(request.getContextPath() + "/showPagesServlet").forward(request,response);
             }else{
                 //用户名或密码错误
                 request.setAttribute("inf","用户名或密码输入错误🙅");

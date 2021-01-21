@@ -22,7 +22,6 @@ public class SearchUserServlet extends HttpServlet {
         request.setAttribute("user",user);
         request.setAttribute("name",name);
         request.getRequestDispatcher(request.getContextPath() + "/list.jsp").forward(request,response);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

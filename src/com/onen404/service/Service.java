@@ -1,6 +1,7 @@
 package com.onen404.service;
 
 
+import com.onen404.domain.Pages;
 import com.onen404.domain.User;
 
 import java.util.ArrayList;
@@ -21,4 +22,6 @@ public interface Service {
     void delSelect(String[] uids);
 
     List<User> findUser(String name);
+
+    Pages showByPages(String index,String countInPage);
 }

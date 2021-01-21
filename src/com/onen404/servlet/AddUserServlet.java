@@ -34,9 +34,8 @@ public class AddUserServlet extends HttpServlet {
         Service s = new ServiceImp();
         System.out.println(user);
         s.addUser(user);
-        request.getRequestDispatcher(request.getContextPath() + "/selectByPageServlet").forward(request,response);
+        request.getRequestDispatcher(request.getContextPath() + "/showPagesServlet").forward(request,response);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }

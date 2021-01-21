@@ -11,4 +11,6 @@ public interface Dao {
     void deleteUser(int id);
     void add(User user);
     List<User> findUser(String name);
+    int totalInf();
+    List<User> searchByPage(int count,int page);
 }

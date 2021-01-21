@@ -34,7 +34,7 @@ public class UpdateServlet extends HttpServlet {
         }
         Service s = new ServiceImp();
         s.update(user);
-        request.getRequestDispatcher(request.getContextPath() + "/selectByPageServlet").forward(request,response);
+        request.getRequestDispatcher(request.getContextPath() + "/showPagesServlet" + "?index=" + request.getParameter("index")).forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
